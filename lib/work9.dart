@@ -162,8 +162,11 @@ class _LoginState extends State<Login> {
           onTap: () {
             if (num == -2) {
               setState(() {
+                print('clear');
                 _input = '';
                 _num = 0;
+                print(_num);
+                print(_input);
               });
             } else if (num == -1) {
               print('Backspace');
@@ -172,10 +175,9 @@ class _LoginState extends State<Login> {
                 _input = _input.substring(0, length - 1);
                 _num = _num - 1;
               });
+              print(_num);
+              print(_input);
             } else {
-              print('$num');
-              print('$_num');
-              print('$_input');
               setState(() {
                 _num++;
                 _input = '$_input$num';
@@ -214,7 +216,9 @@ class _LoginState extends State<Login> {
                   }
                 }
               });
-
+              print('$num');
+              print('$_num');
+              print('$_input');
             }
           },
           borderRadius: BorderRadius.circular(Login.buttonsize / 2),

@@ -109,14 +109,20 @@ class Test extends StatelessWidget {
   }
 }
 
-class MyCard extends StatelessWidget {
+class MyCard extends StatefulWidget {
   final CovidModel covid;
 
   const MyCard({
     Key? key,
     required this.covid,
   }) : super(key: key);
-  final bool _liked = false;
+
+  @override
+  State<MyCard> createState() => _MyCardState();
+}
+
+class _MyCardState extends State<MyCard> {
+  late bool _liked = false;
 
   @override
   Widget build(BuildContext context) {
@@ -133,12 +139,12 @@ class MyCard extends StatelessWidget {
                 children: [
                   CircleAvatar(
                     backgroundImage:
-                        AssetImage('assets/images/${covid.avatar}'),
+                        AssetImage('assets/images/${widget.covid.avatar}'),
                   ),
                   SizedBox(
                     width: 20.0,
                   ),
-                  Text(covid.date),
+                  Text(widget.covid.date),
                   Expanded(
                       child: IconButton(
                     onPressed: () {},
@@ -151,14 +157,23 @@ class MyCard extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Expanded(child: Image.asset('assets/images/${covid.feed}'))
+                Expanded(
+                    child: GestureDetector(
+                      onDoubleTap: (){
+                        setState(() {
+                          _liked = !_liked;
+                        });
+                      },
+                        child: Image.asset('assets/images/${widget.covid.feed}'),
+                    )
+                ),
               ],
             ),
             Container(
               height: 20.0,
             ),
             Row(
-              children: [Expanded(child: Text(covid.caption))],
+              children: [Expanded(child: Text(widget.covid.caption))],
             ),
             Container(
               height: 20.0,
@@ -168,12 +183,12 @@ class MyCard extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      covid.mentter,
+                      widget.covid.mentter,
                       style: TextStyle(
                         color: Colors.deepOrange,
                       ),
                     ),
-                    Text(covid.comment),
+                    Text(widget.covid.comment),
                   ],
                 ),
               ],
@@ -183,11 +198,15 @@ class MyCard extends StatelessWidget {
                 Row(
                   children: [
                     IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        setState(() {
+                          _liked = !_liked;
+                        });
+                      },
                       icon: _liked
                           ? const Icon(
                               Icons.favorite,
-                              color: Colors.deepOrange,
+                              color: Colors.pink,
                             )
                           : const Icon(
                               Icons.favorite_outline,

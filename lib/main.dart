@@ -169,9 +169,8 @@ class HomePage extends StatelessWidget {
         width: 50.0,
         height: 50.0,
         //color: Colors.white, // ห้ามกำหนด color ตรงนี้ ถ้าหากกำหนดใน BoxDecoration แล้ว
-        decoration: BoxDecoration(
+        /*decoration: BoxDecoration(
             color: Colors.white,
-            shape: BoxShape.circle,
             border: Border.all(color: Colors.deepOrange, width: 4.0),
             boxShadow: [
               BoxShadow(
@@ -181,7 +180,7 @@ class HomePage extends StatelessWidget {
                 spreadRadius: 2.0,
               )
             ]
-        ),
+        ),*/
         child: OutlinedButton(
             onPressed: () {
               print('You pressed $num');
